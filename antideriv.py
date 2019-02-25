@@ -2,8 +2,8 @@
 
 #####################################
 # module: antideriv.py
-# YOUR NAME
-# YOUR A#
+# Krista Gurney
+# A01671888
 #####################################
 
 from const import const
