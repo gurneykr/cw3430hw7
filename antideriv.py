@@ -12,7 +12,7 @@ from var import var
 from plus import plus
 from prod import prod
 from quot import quot
-from maker import make_const, make_pwr, make_prod, make_plus
+from maker import make_const, make_pwr, make_prod, make_plus, make_ln, make_absv
 import math
 
 def is_e_const(b):
@@ -30,8 +30,11 @@ def antideriv(i):
         d = i.get_deg()
         ## CASE 2.1: b is var and d is constant.
         if isinstance(b, var) and isinstance(d, const):
-            r = const(d.get_val() + 1.0)
-            return prod(quot(const(1.0), r), pwr(b, r))
+            if d.get_val() == -1:
+                return make_ln(make_absv(pwr(b, const(1.0))))
+            else:
+                r = const(d.get_val() + 1.0)
+                return prod(quot(const(1.0), r), pwr(b, r))
         ## CASE 2.2: b is e
         elif is_e_const(b):# e^(kx) => 1/k  * e(kx)
             if isinstance(d, prod):
