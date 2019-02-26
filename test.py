@@ -139,33 +139,33 @@ class Assign01UnitTests(unittest.TestCase):
     #     for i in range(11): assert abs(fexf(i) - fex2f(i)) <= err
     #     print('Test 07:pass')
 
-    # def test_08(self):
-    #     #(5x-7)^-2  => -1/5 * (5x-7)^-1
-    #     print("****Unit Test 08********")
-    #     fex1 = make_plus(make_prod(make_const(5.0), make_pwr('x', 1.0)), make_const(-7.0))
-    #     fex = make_pwr_expr(fex1, -2.0)
-    #     print(fex)
-    #     afex = antideriv(fex)
-    #     assert not afex is None
-    #     print(afex)
-    #     afexf = tof(afex)
-    #     err = 0.0001
-    #     def gt(x):
-    #         return (-1.0 / 5.0) * ((5 * x - 7.0) ** -1)
-    #
-    #     for i in range(1, 100):
-    #         assert abs(afexf(i) - gt(i)) <= err
-    #     fexf = tof(fex)
-    #     assert not fexf is None
-    #     fex2 = deriv(afex)
-    #     assert not fex2 is None
-    #     print(fex2)
-    #     fex2f = tof(fex2)
-    #     assert not fex2f is None
-    #     for i in range(1, 100):
-    #         assert abs(fexf(i) - fex2f(i)) <= err
-    #     print('Test 08:pass')
-    #
+    def test_08(self):
+        #(5x-7)^-2  => -1/5 * (5x-7)^-1
+        print("****Unit Test 08********")
+        fex1 = make_plus(make_prod(make_const(5.0), make_pwr('x', 1.0)), make_const(-7.0))
+        fex = make_pwr_expr(fex1, -2.0)
+        print(fex)
+        afex = antideriv(fex)
+        assert not afex is None
+        print("antideriv: ", afex)
+        afexf = tof(afex)
+        err = 0.0001
+        def gt(x):
+            return (-1.0 / 5.0) * ((5 * x - 7.0) ** -1)
+
+        for i in range(1, 100):
+            assert abs(afexf(i) - gt(i)) <= err
+        fexf = tof(fex)
+        assert not fexf is None
+        fex2 = deriv(afex)
+        assert not fex2 is None
+        print("deriv fex2: ",fex2)
+        fex2f = tof(fex2)
+        assert not fex2f is None
+        for i in range(1, 100):
+            assert abs(fexf(i) - fex2f(i)) <= err
+        print('Test 08:pass')
+
     # def test_09(self):
     #     #3/(2+x)
     #     print("****Unit Test 09********")

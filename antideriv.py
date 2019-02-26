@@ -16,7 +16,7 @@ from maker import make_const, make_pwr, make_prod, make_plus, make_ln, make_absv
 import math
 
 def is_e_const(b):
-    return b.get_val() == math.e
+    return isinstance(b, const) and b.get_val() == math.e
 
 def antideriv(i):
     ## CASE 1: i is a constant
@@ -45,7 +45,14 @@ def antideriv(i):
         # ## CASE 2.3: b is a sum
         elif isinstance(b, plus):#(1+x)^-3
             r = const(d.get_val()+1.0)
-            return prod(quot(const(1.0), r), pwr(b, r))
+            if isinstance(b.get_elt1(), prod):#(5x+7)^2
+                if isinstance(d, const) and d.get_val() < 0:
+                    return prod(quot(const(-1.0), b.get_elt1().get_mult1()), pwr(b, r))
+                else:
+                    return prod(quot(const(1.0), b.get_elt1().get_mult1()), pwr(b, r))
+                #return prod(quot(const(1.0), ))
+            else:
+                return prod(quot(const(1.0), r), pwr(b, r))
         else:
             raise Exception('antideriv: unknown case')
     ### CASE 3: i is a sum, i.e., a plus object.
