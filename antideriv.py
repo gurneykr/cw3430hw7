@@ -50,13 +50,11 @@ def antideriv(i):
             raise Exception('antideriv: unknown case')
     ### CASE 3: i is a sum, i.e., a plus object.
     elif isinstance(i, plus):
-        ## your code here
-        pass
+        return plus(antideriv(i.get_elt1()), antideriv(i.get_elt2()))
     ### CASE 4: is is a product, i.e., prod object,
     ### where the 1st element is a constant.
     elif isinstance(i, prod):
-        ## your code here
-        pass
+        return prod(i.get_mult1(), antideriv(i.get_mult2()))
     else:
         raise Exception('antideriv: unknown case')
 
