@@ -47,12 +47,11 @@ def antideriv(i):
             r = const(d.get_val()+1.0)
             if isinstance(d, const) and d.get_val() == -1:
                 return make_ln(make_absv(b))
-            elif isinstance(b.get_elt1(), prod):#(5x+7)^2
+            elif isinstance(b.get_elt1(), prod):#(3x+2)^4 => 1/3 * anti(
                 if isinstance(d, const) and d.get_val() < 0:
                     return prod(quot(const(-1.0), b.get_elt1().get_mult1()), pwr(b, r))
                 else:
-                    return prod(quot(const(1.0), b.get_elt1().get_mult1()), pwr(b, r))
-                #return prod(quot(const(1.0), ))
+                    return prod(quot(const(1.0), prod(b.get_elt1().get_mult1(), r)), pwr(b, r))
             else:
                 return prod(quot(const(1.0), r), pwr(b, r))
         else:
