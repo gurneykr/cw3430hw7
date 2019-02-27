@@ -163,17 +163,19 @@ class Assign01UnitTests(unittest.TestCase):
         fex2f = tof(fex2)
         assert not fex2f is None
         for i in range(1, 100):
+            print(fexf(i), " ", fex2f(i))
             assert abs(fexf(i) - fex2f(i)) <= err
         print('Test 08:pass')
 
     # def test_09(self):
-    #     #3/(2+x)
+    #     #3*(x+2)^-1 => 3*ln|x+2|
     #     print("****Unit Test 09********")
     #     fex0 = make_plus(make_pwr('x', 1.0), make_const(2.0))
     #     fex1 = make_pwr_expr(fex0, -1.0)
     #     fex = make_prod(make_const(3.0), fex1)
     #     print(fex)
     #     afex = antideriv(fex)
+    #     print("antideriv: ", afex)
     #     err = 0.0001
     #     afexf = tof(afex)
     #     def gt(x):
@@ -192,7 +194,7 @@ class Assign01UnitTests(unittest.TestCase):
     #     for i in range(1, 1000):
     #         assert abs(fexf(i) - fex2f(i)) <= err
     #     print('Test 09:pass')
-    #
+
     # def test_10(self):
     #     #(3x+2)^4
     #     print("****Unit Test 10********")

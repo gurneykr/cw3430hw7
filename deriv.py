@@ -69,14 +69,14 @@ def pwr_deriv(p):
             return p
         else:
             raise Exception('pwr_deriv: case 2: ' + str(p))
-    elif isinstance(b, plus):  # (x+2)^3
+    elif isinstance(b, plus):  # (4x+2)^3 => 3(4x+2)^2 *4
         if isinstance(d, const):
-            return prod(d, pwr(b, const(d.get_val()-1)))
+            return prod(prod(d, pwr(b, const(d.get_val()-1))), deriv(b))
         else:
             raise Exception('pwr_deriv: case 3: ' + str(p))
     elif isinstance(b, prod):#(3x)^2 => (2*3*x)^(2-1)
         if isinstance(d, const):
-            pwr( prod(d, prod(b.get_mult1(), b.get_mult2())), const(d.get_val()-1))
+            return pwr( prod(d, prod(b.get_mult1(), b.get_mult2())), const(d.get_val()-1))
         else:
             raise Exception('pwr_deriv: case 4: ' + str(p))
     elif isinstance(b, quot):
@@ -156,7 +156,8 @@ def prod_deriv(p):
             else:
                 return prod(deriv(m1), m2)
         else:
-            return prod(m1, deriv(m2))
+            return plus(prod(m1, deriv(m2)), prod(m2, deriv(m1)))
+            # return prod(m1, deriv(m2))
     else:
        raise Exception('prod_deriv: case 4:' + str(p))
 
