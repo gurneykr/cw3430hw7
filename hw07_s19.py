@@ -2,8 +2,8 @@
 
 #########################################
 # module: hw07_s19.py
-# YOUR NAME
-# YOUR A#
+# Krista Gurney
+# A01671888
 #########################################
 
 import math
@@ -13,7 +13,7 @@ import cv2
 import sys
 import os
 import re
-
+import argparse
 ## uses these command line options if you want to run your program
 ## in a command window.
 #ap = argparse.ArgumentParser()
@@ -36,8 +36,10 @@ def generate_file_names(ftype, rootdir):
             generate_file_names(ftype, d)
 
 def read_img_dir(ftype, imgdir):
-    ## your code here
-    pass
+    images_array = []
+    for file in generate_file_names(ftype,imgdir):
+        images_array.append((file, cv2.imread(file)))
+    return images_array
 
 def grayscale(i, imglst):
     ## your code here
@@ -54,15 +56,24 @@ def amplify(i, imglst, c, amount):
 ## here is main for you to test your implementations.
 ## remember to destroy all windows after you are done.
 if __name__ == '__main__':
-    #il = read_img_dir(args['ftype'], args['imgdir'])
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-t', '--type', required=True, help='Type of image')
+    ap.add_argument('-p', '--path', required=True, help='Path to image directory')
+    args = vars(ap.parse_args())
+
+    il = read_img_dir(args['type'], args['path'])
+    print(il[0][1])
+    # image = cv2.imread(il[0])
+    # cv2.imshow("image", image)
+    # cv2.waitKey(0)
+
+    # print(il[0][1])
     #verify_img_list(il)
     #grayscale(0, il)
     #split_merge(0, il)
     #amplify(0, il, 'b', 200)
     #cv2.waitKey()
     #cv2.destroyAllWindows()
-    pass
-    
 
 
  
