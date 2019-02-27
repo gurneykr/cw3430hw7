@@ -122,6 +122,8 @@ def prod_deriv(p):
                 return const(0)
             else:
                 return prod(m1, deriv(m2))
+        elif isinstance(m2, ln):
+            return prod(m1, deriv(m2))
         else:
             raise Exception('prod_deriv: case 0' + str(p))
     elif isinstance(m1, plus):

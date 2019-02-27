@@ -45,7 +45,9 @@ def antideriv(i):
         # ## CASE 2.3: b is a sum
         elif isinstance(b, plus):#(1+x)^-3
             r = const(d.get_val()+1.0)
-            if isinstance(b.get_elt1(), prod):#(5x+7)^2
+            if isinstance(d, const) and d.get_val() == -1:
+                return make_ln(make_absv(b))
+            elif isinstance(b.get_elt1(), prod):#(5x+7)^2
                 if isinstance(d, const) and d.get_val() < 0:
                     return prod(quot(const(-1.0), b.get_elt1().get_mult1()), pwr(b, r))
                 else:
