@@ -14,9 +14,9 @@ from prod import prod
 from quot import quot
 from maker import make_const, make_pwr, make_prod, make_plus, make_ln, make_absv
 import math
-
-def is_e_const(b):
-    return isinstance(b, const) and b.get_val() == math.e
+from consts import is_e_const, is_pi_const, is_zero_const
+# def is_e_const(b):
+#     return isinstance(b, const) and b.get_val() == math.e
 
 def antideriv(i):
     ## CASE 1: i is a constant
