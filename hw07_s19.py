@@ -41,8 +41,18 @@ def read_img_dir(ftype, imgdir):
         images_array.append((file, cv2.imread(file)))
     return images_array
 
+def luminosity(rgb, rcoeff=0.2126, gcoeff=0.7152, bcoeff=0.0722):
+    return rcoeff*rgb[0]+gcoeff*rgb[1]+bcoeff*rgb[2]
+
 def grayscale(i, imglst):
     cv2.imshow(imglst[i][0], imglst[i][1])
+
+    for row in (imglst[i][1]):
+        for col in row:
+            lum = luminosity(col)
+            col[0] = col[1] = col[2] = lum
+
+    cv2.imshow("Grayscaled", imglst[i][1])
     cv2.waitKey(0)
 
 def split_merge(i, imglst):
