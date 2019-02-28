@@ -42,8 +42,7 @@ def read_img_dir(ftype, imgdir):
     return images_array
 
 def grayscale(i, imglst):
-
-    cv2.imshow(imglst[1], imglst[i][0])
+    cv2.imshow(imglst[i][0], imglst[i][1])
     cv2.waitKey(0)
 
 def split_merge(i, imglst):
@@ -65,7 +64,9 @@ if __name__ == '__main__':
     il = read_img_dir(args['type'], args['path'])
 
     grayscale(0, il)
-    # print(il[0][1])
+    # print(il[0][0])#path
+    # print(il[0][1])#matrix
+
     # print(il[0][1].shape)
     # # image = cv2.imread(il[0])
     # cv2.imshow("image", image)
