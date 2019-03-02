@@ -53,7 +53,6 @@ def grayscale(i, imglst):
             col[0] = col[1] = col[2] = lum
 
     cv2.imshow("Grayscaled", imglst[i][1])
-    cv2.waitKey(0)
 
 def split_merge(i, imglst):
     cv2.imshow(imglst[i][0], imglst[i][1])
@@ -66,12 +65,21 @@ def split_merge(i, imglst):
     cv2.imshow('Green', cv2.merge([zeros, G, zeros]))
     cv2.imshow('Blue', cv2.merge([B, zeros, zeros]))
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
 def amplify(i, imglst, c, amount):
-    ## your code here
-    pass
+    cv2.imshow(imglst[i][0], imglst[i][1])
+
+    ## split the image into 3 channels
+    B, G, R = cv2.split(imglst[i][1])
+
+    if c == "b":
+        amplified_blue = cv2.merge([B + amount, G, R])
+        cv2.imshow('Amplified Blue', amplified_blue)
+    elif c == "g":
+        amplified_green = cv2.merge([B, G + amount, R])
+        cv2.imshow('Amplified Green', amplified_green)
+    elif c == "r":
+        amplified_red = cv2.merge([B, G, R + amount])
+        cv2.imshow('Amplified Red', amplified_red)
 
 ## here is main for you to test your implementations.
 ## remember to destroy all windows after you are done.
@@ -83,23 +91,10 @@ if __name__ == '__main__':
 
     il = read_img_dir(args['type'], args['path'])
 
-    # grayscale(0, il)
+    grayscale(0, il)
     split_merge(0, il)
-    # print(il[0][0])#path
-    # print(il[0][1])#matrix
+    amplify(0, il, 'b', 100)
 
-    # print(il[0][1].shape)
-    # # image = cv2.imread(il[0])
-    # cv2.imshow("image", image)
-    # cv2.waitKey(0)
-
-    # print(il[0][1])
-    #verify_img_list(il)
-    #grayscale(0, il)
-    #split_merge(0, il)
-    #amplify(0, il, 'b', 200)
-    #cv2.waitKey()
-    #cv2.destroyAllWindows()
-
-
- 
+    amplify(0, il, 'r', 200)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
