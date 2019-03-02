@@ -56,8 +56,18 @@ def grayscale(i, imglst):
     cv2.waitKey(0)
 
 def split_merge(i, imglst):
-    ## your code here
-    pass
+    cv2.imshow(imglst[i][0], imglst[i][1])
+
+    B, G, R = cv2.split(imglst[i][1])
+
+    zeros = np.zeros(imglst[i][1].shape[:2], dtype='uint8')
+
+    cv2.imshow('Red', cv2.merge([zeros, zeros, R]))
+    cv2.imshow('Green', cv2.merge([zeros, G, zeros]))
+    cv2.imshow('Blue', cv2.merge([B, zeros, zeros]))
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 def amplify(i, imglst, c, amount):
     ## your code here
@@ -73,7 +83,8 @@ if __name__ == '__main__':
 
     il = read_img_dir(args['type'], args['path'])
 
-    grayscale(0, il)
+    # grayscale(0, il)
+    split_merge(0, il)
     # print(il[0][0])#path
     # print(il[0][1])#matrix
 
